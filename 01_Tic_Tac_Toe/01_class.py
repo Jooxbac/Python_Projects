@@ -85,6 +85,7 @@ while not game_over:
         board.update_full()
         game_over = board.is_full
 
+# Comprobar por aquí que no es tie tampoco
         empty_cell = False
         if not game_over:
             while not empty_cell:
@@ -105,7 +106,42 @@ if play_again == "Y":
 else:
     break
 
+# lesson 4
 
+# Board method
+# Checks for a tie
+def is_tie(self):
+    used_cells = 0
+    for cell in self.cells:
+        if cell != " ":
+            used_cells +=1
+    if used_cells == 9:
+        return True
+    else:
+        return False
+    
+# lesson 5: AI moves
 
+# Board method, introducir no fluxo do xogo
+def ai_move(self, player):
 
-# https://www.youtube.com/watch?v=CvH9gsG9z3M&list=PLlEgNdBJEO-m6o4INllCF1FRMS262A5C_&index=4
+    if player == "X":
+        enemy = "O"
+    if player == "O":
+        enemy = "X"
+
+    # If the center is open, choose that
+    if self.cells[4] == " ":
+        self.update_cell(4, player)
+    elif
+    # AI blocks
+
+    # AI can win
+
+    # Choose random, import random better
+    for i in range(9):
+        if self.cells[i] == " ":
+            self.update_cell(i, player)
+            breack
+
+# last lesson: https://www.youtube.com/watch?v=8t9ou2I0IOE&list=PLlEgNdBJEO-m6o4INllCF1FRMS262A5C_&index=6&ab_channel=TokyoEdtech
