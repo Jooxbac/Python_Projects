@@ -1,9 +1,17 @@
 import os
 
 
+class Player():
+    def __init__(self, name, piece):
+        self.name = name
+        self.piece = piece
+
+
 class Board():
     def __init__(self):
-        self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "] # 9 cells
+        self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]  # 9 cells
+        self.winner = None
+        self.is_full = False
 
     def display(self):  # Change for formatted print better
         print(f" {self.cells[0]} | {self.cells[1]} | {self.cells[2]} ")
@@ -19,16 +27,33 @@ class Board():
         else:
             self.cells[cell_number-1] = player
             return True
+    
+    def update_full(self):
+        filtrado = filter(lambda cell: cell is " ", self.cells)
+        if (len(filtrado) == 0):
+            self.is_full = True
+
+    def reset(self):
+        self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+
+    def is_winner(self, player: Player):
+        if self.cells[0] == player.piece and self.cells[1] == player.piece and self.cells[2] == player.piece:
+            self.winner= player.name
+            return True
+"""         elif self.cells[0] == player.piece and self.cells[1] == player.piece and self.cells[2] == player.piece:
+            self.winner= player.name
+            return True
+        elif self.cells[0] == player.piece and self.cells[1] == player.piece and self.cells[2] == player.piece:
+            self.winner= player.name
+            return True """
 
 
-class Player():
-    def __init__(self, name, piece):
-        self.name = name
-        self.piece = piece
+
 
 
 board = Board()  # Define this at tope and move classes to other files and import/use
-player_1 = Player("Player 1", "X") # Change and define that data with players input
+# Change and define that data with players input
+player_1 = Player("Player 1", "X")
 player_2 = Player("Player 2", "O")
 players = [player_1, player_2]
 game_over = False
@@ -48,17 +73,39 @@ def refresh_screen():
     # Show the board
     board.display()
 
+
 while not game_over:
-    
+
     for player in players:
 
         refresh_screen()
-        empty_cell = False
 
-        while not empty_cell:
-            # Get input:
-            player_choice = int(input(f"\n{player.name}) Please choose 1 - 9. > "))
-            # Update board
-            empty_cell = board.update_cell(player_choice, player.piece)
-            if not empty_cell:
-                print("There's a piece in this position already")
+        # Check if is a winner
+        game_over = board.is_winner(player)
+        board.update_full()
+        game_over = board.is_full
+
+        empty_cell = False
+        if not game_over:
+            while not empty_cell:
+                # Get input:
+                player_choice = int(
+                    input(f"\n{player.name}) Please choose 1 - 9. > "))
+                # Update board
+                empty_cell = board.update_cell(player_choice, player.piece)
+                if not empty_cell:
+                    print("There's a piece in this position already")
+
+
+# Modificar, jutno con is full, update full, is_full etc
+print(f"The winner is: {board.winner}")
+play_again = raw_input("Would you like to play again [Y] Yes [N] No) > ")
+if play_again == "Y":
+    continue
+else:
+    break
+
+
+
+
+# https://www.youtube.com/watch?v=CvH9gsG9z3M&list=PLlEgNdBJEO-m6o4INllCF1FRMS262A5C_&index=4
