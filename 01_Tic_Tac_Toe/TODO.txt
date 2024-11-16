@@ -1,0 +1,4 @@
+Order board methods by name
+Check every board methods
+Reconstruct main.py and use basic methods, then develop the game
+Optimize code

@@ -1,5 +1,6 @@
 from player import Player
 
+
 class Board():
     def __init__(self) -> None:
         """
@@ -15,6 +16,18 @@ class Board():
         self.is_full = False
         self.is_tie = False
         self.winner = None
+        # Possible wins
+        self.win_combinations = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9],
+            [1, 4, 7],
+            [2, 5, 8],
+            [3, 6, 9],
+            [1, 2, 3],
+            [1, 5, 9],
+            [3, 5, 7],
+        ]
 
     def display(self) -> None:
         """
@@ -82,56 +95,52 @@ class Board():
             self.winner = player.name
             return True
 
+    # Checks for a tie
+    def is_tie(self) -> bool:
+        """
+        TODO
+        Checks if the game ended with a tie.
 
+        Returns:
+            None: does not return a value.
+        """
+        used_cells = 0
+        for cell in self.cells:
+            if cell != " ":
+                used_cells += 1
+        if used_cells == 9:
+            return True
+        else:
+            return False
 
-# TODO
-# lesson 4
+    def ai_move(self, player) -> None:
+        """
+        TODO
+        Movements done by the computer when playing against it.
 
-# Board method
-# Checks for a tie
-def is_tie(self):
-    used_cells = 0
-    for cell in self.cells:
-        if cell != " ":
-            used_cells +=1
-    if used_cells == 9:
-        return True
-    else:
-        return False
-    
-# lesson 5: AI moves
+        Attributes:
+            player (str): lis
 
-# Board method, introducir no fluxo do xogo
-def ai_move(self, player):
+        Returns:
+            None: does not return a value.
+        """
+        if player == "X":
+            enemy = "O"
+        if player == "O":
+            enemy = "X"
 
-    if player == "X":
-        enemy = "O"
-    if player == "O":
-        enemy = "X"
+        # If the center is open, choose that
+        if self.cells[4] == " ":
+            self.update_cell(4, player)
+        elif True:
+            pass
 
-    # If the center is open, choose that
-    if self.cells[4] == " ":
-        self.update_cell(4, player)
-    elif
-    # AI blocks
+        # AI blocks
 
-    # AI can win
+        # AI can win
 
-    # Choose random, import random better
-    for i in range(9):
-        if self.cells[i] == " ":
-            self.update_cell(i, player)
-            breack
-
-# Possible wins
-win_combinations = [
-    [1,2,3],
-    [4,5,6],
-    [7,8,9],
-    [1,4,7],
-    [2,5,8],
-    [3,6,9],
-    [1,2,3],
-    [1,5,9],
-    [3,5,7],
-]
+        # Choose random, import random better
+        for i in range(9):
+            if self.cells[i] == " ":
+                self.update_cell(i, player)
+                break
