@@ -11,12 +11,12 @@ class Board():
             is_full (bool): indicates whether the board is full.
             is_tie (bool): indicates whether the game ended in a tie.
             winner (str | None): the winner of the game, or None if there is no winner yet.
+            win_combinations (list[list[str]]): possible combinations that win the game.
         """
         self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]  # 9 cells
         self.is_full = False
         self.is_tie = False
         self.winner = None
-        # Possible wins
         self.win_combinations = [
             [1, 2, 3],
             [4, 5, 6],
