@@ -1,5 +1,7 @@
 import os
 from board import Board
+from player import Player
+
 
 def print_header():
     print("Welcome to Tic-Tac-Toe\n")
