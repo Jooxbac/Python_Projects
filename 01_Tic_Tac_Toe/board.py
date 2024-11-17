@@ -61,28 +61,16 @@ class Board():
                 self.update_cell(i, player)
                 break
 
-    def display(self) -> None:
+    # Checks for a tie
+    def check_for_tie(self) -> bool:
         """
-        Displays the board.
-
-        Returns:
-            None: does not return a value.
-        """
-        print(f" {self.cells[0]} | {self.cells[1]} | {self.cells[2]} ")
-        print("-----------")
-        print(f" {self.cells[3]} | {self.cells[4]} | {self.cells[5]} ")
-        print("-----------")
-        print(f" {self.cells[6]} | {self.cells[7]} | {self.cells[8]} ")
-
-        # Checks for a tie
-    def is_tie(self) -> bool:
-        """
-        TODO
+        TODO Poderia combinalo con check_for_winner
         Checks if the game ended with a tie.
 
         Returns:
             None: does not return a value.
         """
+        # If every cell has a piece
         used_cells = 0
         for cell in self.cells:
             if cell != " ":
@@ -119,6 +107,19 @@ class Board():
                         self.winner = player.name
 
         return is_win_combination
+
+    def display(self) -> None:
+        """
+        Displays the board.
+
+        Returns:
+            None: does not return a value.
+        """
+        print(f" {self.cells[0]} | {self.cells[1]} | {self.cells[2]} ")
+        print("-----------")
+        print(f" {self.cells[3]} | {self.cells[4]} | {self.cells[5]} ")
+        print("-----------")
+        print(f" {self.cells[6]} | {self.cells[7]} | {self.cells[8]} ")
 
     def reset(self) -> None:
         """
